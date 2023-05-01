@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class FrameBuilder {
 
@@ -45,7 +44,7 @@ public class FrameBuilder {
     public JPanel questionTextPanel(String text) {
         // Cria um painel para adicionar o texto e o botão
         JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS)); // Altera o layout do JPanel para BoxLayout
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS)); // Altera o layout do JPanel para BoxLayout AQUI ESTA O PROBLEMA
         panel.add(Box.createVerticalStrut(10));
 
         JLabel label = new JLabel("    " + text, UIManager.getIcon("OptionPane.questionIcon"), JLabel.RIGHT);
@@ -116,10 +115,10 @@ public class FrameBuilder {
         return buttonPanel;
     }
 
-    public JPanel createOkCancelButton(ArrayList<JFrame> frames, ActionListener yesActionListener) {
+    public JPanel createOkCancelButton(ArrayList<JFrame> frames, ActionListener okActionListener) {
         ActionListenerBuilder actionListenerBuilder = new ActionListenerBuilder();
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER)); // Define o layout do painel como FlowLayout
-        buttonPanel.add(createOKButton(yesActionListener));
+        buttonPanel.add(createOKButton(okActionListener));
         buttonPanel.add(createCancelButton(actionListenerBuilder.closeAllScreens(frames)));
         return buttonPanel;
     }

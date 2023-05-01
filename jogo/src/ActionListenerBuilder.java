@@ -3,49 +3,63 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ActionListenerBuilder {
 
-    public ActionListener actionListenerForTextField (ArrayList<JFrame> screensToClose, JFrame nextScreen, JTextField textField) {
+    public ActionListener lastActionListener(ArrayList<JFrame> screensToClose, JTextField textField) {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 closeScreens(screensToClose);
-                ScreenBuilder.getInstance().setPlate(textField.getText());
-
-                FramesOrchestrator.getInstance().setHasChangedScreen(true);
+                ScreenBuilder.getInstance().setGuess(textField.getText());
+                textField.setText("");
+                FramesOrchestrator.getInstance().setShouldRestart(true);
             }
         };
     }
 
-    public ActionListener actionListener (ArrayList<JFrame> screensToClose, JFrame nextScreen) {
+    public ActionListener actionListenerForTextField(ArrayList<JFrame> screensToClose, JTextField textField) {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String text = textField.getText();
+                closeScreens(screensToClose);
+
+                if (Objects.nonNull(text) && !text.isEmpty()) {
+                    ScreenBuilder.getInstance().setOldPlate(ScreenBuilder.getInstance().getPlate());
+                    ScreenBuilder.getInstance().setPlate(textField.getText());
+                    textField.setText("");
+                    JFrame butIsNot = ScreenBuilder.getInstance().butIsNot();
+                    butIsNot.setVisible(true);
+                } else {
+                    FramesOrchestrator.getInstance().setShouldRestart(true);
+                }
+            }
+        };
+    }
+
+    public ActionListener actionListener(ArrayList<JFrame> screensToClose, JFrame nextScreen) {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 closeScreens(screensToClose);
                 nextScreen.setVisible(true);
-
-                repaintAll(screensToClose);
             }
         };
     }
 
-    public ActionListener closeAllScreens (ArrayList<JFrame> screensToClose) {
+    public ActionListener closeAllScreens(ArrayList<JFrame> screensToClose) {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 closeScreens(screensToClose);
-
-                repaintAll(screensToClose);
+                FramesOrchestrator.getInstance().setShouldRestart(true);
             }
         };
     }
 
-    private void closeScreens (ArrayList<JFrame> frames){
+    private void closeScreens(ArrayList<JFrame> frames) {
         frames.forEach(Window::dispose);
-    }
-
-    private void repaintAll (ArrayList<JFrame> frames){
-        frames.forEach(Window::repaint);
     }
 }

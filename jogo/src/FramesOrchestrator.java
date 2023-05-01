@@ -1,8 +1,9 @@
 import javax.swing.*;
+import java.util.Objects;
 
 public class FramesOrchestrator {
     private static FramesOrchestrator instance;
-    private boolean hasChangedScreen = true;
+    private boolean shouldRestart = true;
 
     private FramesOrchestrator() {
     }
@@ -17,33 +18,41 @@ public class FramesOrchestrator {
     public void executor() throws InterruptedException {
         while (true) {
             Thread.sleep(100);
-            if(isHasChangedScreen()) {
+            if (isShouldRestart()) {
                 new FramesOrchestrator().orchestrator();
-                setHasChangedScreen(false);
+                setShouldRestart(false);
             }
         }
     }
 
-    public void orchestrator(){
+    public void orchestrator() {
         ScreenBuilder screenBuilder = ScreenBuilder.getInstance();
 
-        JFrame imRightAgainScreen = screenBuilder.imRightAgain();
+        JFrame lastScreen = screenBuilder.lastScreen();
+        JFrame fifthScreen = screenBuilder.fifthScreen();
 
-        JFrame whatDoYouThoughtScreen = screenBuilder.whatDoYouThought();
-        JFrame itIsChocolateCakeScreen = screenBuilder.doYouThoughtInThisPlate(imRightAgainScreen, whatDoYouThoughtScreen);
-        JFrame itIsLasagnaScreen = screenBuilder.itIsLasagnaScreen(imRightAgainScreen, whatDoYouThoughtScreen);
-        JFrame itIsPastaScreen = screenBuilder.itIsPastaScreen(itIsLasagnaScreen, itIsChocolateCakeScreen);
+        JFrame cakeScreen = screenBuilder.interrogationScreen(Constants.chocolateCake, lastScreen, fifthScreen);
+        JFrame forthScreen;
 
-        JFrame thinkInAPlateFrame = screenBuilder.thinkInAPlateScreen(itIsPastaScreen);
+        if (Objects.nonNull(screenBuilder.getGuess()) && !screenBuilder.getGuess().isBlank()) {
+            JFrame nextScreen = screenBuilder.interrogationScreen(screenBuilder.getPlate(), lastScreen, fifthScreen);
+            forthScreen = screenBuilder.interrogationScreen(screenBuilder.getGuess(), nextScreen, cakeScreen);
+        } else {
+            forthScreen = cakeScreen;
+        }
 
-        thinkInAPlateFrame.setVisible(true);
+        JFrame thirdScreen = screenBuilder.thirdScreen(lastScreen, fifthScreen);
+        JFrame secondScreen = screenBuilder.secondScreen(thirdScreen, forthScreen);
+        JFrame firstScreen = screenBuilder.firstScreen(secondScreen);
+
+        firstScreen.setVisible(true);
     }
 
-    public boolean isHasChangedScreen() {
-        return hasChangedScreen;
+    public boolean isShouldRestart() {
+        return shouldRestart;
     }
 
-    public void setHasChangedScreen(boolean hasChangedScreen) {
-        this.hasChangedScreen = hasChangedScreen;
+    public void setShouldRestart(boolean shouldRestart) {
+        this.shouldRestart = shouldRestart;
     }
 }
