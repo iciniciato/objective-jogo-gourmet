@@ -1,18 +1,29 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ScreenBuilder {
     private static ScreenBuilder instance;
     private static final ArrayList<JFrame> frames = new ArrayList<>();
 
-    private String plate = "bolo de chocolate";
+    private String plate = null;
+
+    private ScreenBuilder() {}
+
+    public static ScreenBuilder getInstance() {
+        if (instance == null) {
+            instance = new ScreenBuilder();
+        }
+        return instance;
+    }
 
     public JFrame thinkInAPlateScreen (JFrame nextScreen) {
         FrameBuilder frameBuilder = new FrameBuilder();
         ActionListenerBuilder actionListenerBuilder = new ActionListenerBuilder();
 
         JFrame thinkInAPlateFrame = frameBuilder.buildEmptyFrame("Jogo Gourmet");
+        frames.add(thinkInAPlateFrame);
 
         JPanel thinkInAPlatePanel = frameBuilder.textPanel("Pense em um prato que gosta");
         thinkInAPlateFrame.add(thinkInAPlatePanel,  BorderLayout.CENTER);
@@ -28,12 +39,6 @@ public class ScreenBuilder {
 
     public JFrame itIsLasagnaScreen(JFrame yesScreen, JFrame noScreen){
         return defaultYesNoScreen("O prato que você pensou é Lasanha?", yesScreen, noScreen);
-    }
-
-    public JFrame doYouThoughtInThisPlate(JFrame yesScreen, JFrame noScreen){
-        JFrame screen = defaultYesNoScreen("O prato que você pensou é " + plate + "?", yesScreen, noScreen);
-        screen.setSize(340, 130);
-        return screen;
     }
 
     public JFrame whatDoYouThought(){
@@ -55,6 +60,12 @@ public class ScreenBuilder {
         whatDoYouThoughtPanel.add(frameBuilder.createOkCancelButton(frames, actionListenerBuilder.actionListenerForTextField(frames, null, plateTextField)), BorderLayout.CENTER);
 
         return whatDoYouThoughtFrame;
+    }
+
+    public JFrame doYouThoughtInThisPlate(JFrame yesScreen, JFrame noScreen){
+        JFrame screen = defaultYesNoScreen("O prato que você pensou é " + getPlate() + "?", yesScreen, noScreen);
+        screen.setSize(340, 130);
+        return screen;
     }
 
 
@@ -98,6 +109,9 @@ public class ScreenBuilder {
     }
 
     public String getPlate() {
+        if(Objects.isNull(plate) || plate.isEmpty()){
+            return "bolo de chocolate";
+        }
         return plate;
     }
 }

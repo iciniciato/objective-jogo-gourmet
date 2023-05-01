@@ -11,6 +11,9 @@ public class ActionListenerBuilder {
             @Override
             public void actionPerformed(ActionEvent e) {
                 closeScreens(screensToClose);
+                ScreenBuilder.getInstance().setPlate(textField.getText());
+
+                FramesOrchestrator.getInstance().setHasChangedScreen(true);
             }
         };
     }
@@ -21,6 +24,8 @@ public class ActionListenerBuilder {
             public void actionPerformed(ActionEvent e) {
                 closeScreens(screensToClose);
                 nextScreen.setVisible(true);
+
+                repaintAll(screensToClose);
             }
         };
     }
@@ -30,11 +35,17 @@ public class ActionListenerBuilder {
             @Override
             public void actionPerformed(ActionEvent e) {
                 closeScreens(screensToClose);
+
+                repaintAll(screensToClose);
             }
         };
     }
 
     private void closeScreens (ArrayList<JFrame> frames){
         frames.forEach(Window::dispose);
+    }
+
+    private void repaintAll (ArrayList<JFrame> frames){
+        frames.forEach(Window::repaint);
     }
 }
