@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class FrameBuilder {
@@ -79,13 +80,6 @@ public class FrameBuilder {
         return button;
     }
 
-    public JButton createCentralizedInfoScreenButton(ActionListener actionListener, String buttonText){
-        JButton button = new JButton(buttonText);
-        button.setPreferredSize(new Dimension(80, 30)); // Define a largura preferencial do botão
-        button.addActionListener(actionListener);
-        return button;
-    }
-
     public JButton createYesButton(ActionListener actionListener){
         JButton button = new JButton("<html><u>S</u>im</html>");
         button.setAlignmentX(1f);
@@ -100,11 +94,33 @@ public class FrameBuilder {
         return button;
     }
 
-    public JPanel createYesNoButton(JFrame yesActionListener, JFrame noActionListener) {
+    public JButton createCancelButton(ActionListener actionListener){
+        JButton button = new JButton("<html><u>C</u>ancelar</html>");
+        button.setAlignmentX(0.009f);
+        button.addActionListener(actionListener);
+        return button;
+    }
+
+    public JButton createOKButton(ActionListener actionListener){
+        JButton button = new JButton("<html><u>O</u>k</html>");
+        button.setAlignmentX(0.009f);
+        button.addActionListener(actionListener);
+        return button;
+    }
+
+    public JPanel createYesNoButton(ArrayList<JFrame> frames, JFrame yesActionListener, JFrame noActionListener) {
         ActionListenerBuilder actionListenerBuilder = new ActionListenerBuilder();
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER)); // Define o layout do painel como FlowLayout
-        buttonPanel.add(createYesButton(actionListenerBuilder.actionListener(yesActionListener)));
-        buttonPanel.add(createNoButton(actionListenerBuilder.actionListener(noActionListener)));
+        buttonPanel.add(createYesButton(actionListenerBuilder.actionListener(frames, yesActionListener)));
+        buttonPanel.add(createNoButton(actionListenerBuilder.actionListener(frames, noActionListener)));
+        return buttonPanel;
+    }
+
+    public JPanel createOkCancelButton(ArrayList<JFrame> frames, ActionListener yesActionListener) {
+        ActionListenerBuilder actionListenerBuilder = new ActionListenerBuilder();
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER)); // Define o layout do painel como FlowLayout
+        buttonPanel.add(createOKButton(yesActionListener));
+        buttonPanel.add(createCancelButton(actionListenerBuilder.closeAllScreens(frames)));
         return buttonPanel;
     }
 }

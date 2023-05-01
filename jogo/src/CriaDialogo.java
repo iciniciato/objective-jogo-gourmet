@@ -1,12 +1,16 @@
 import javax.swing.*;
-import java.util.ArrayList;
 
 public class CriaDialogo {
+
    public static void main(String[] args) {
        ScreenBuilder screenBuilder = new ScreenBuilder();
 
-       JFrame itIsLasagnaScreen = screenBuilder.itIsLasagnaScreen(screenBuilder.imRightAgain(), null);
-       JFrame itIsPastaScreen = screenBuilder.itIsPastaScreen(itIsLasagnaScreen, null);
+       JFrame imRightAgainScreen = screenBuilder.imRightAgain();
+
+       JFrame whatDoYouThoughtScreen = screenBuilder.whatDoYouThought();
+       JFrame itIsChocolateCakeScreen = screenBuilder.doYouThoughtInThisPlate(imRightAgainScreen, whatDoYouThoughtScreen);
+       JFrame itIsLasagnaScreen = screenBuilder.itIsLasagnaScreen(imRightAgainScreen, whatDoYouThoughtScreen);
+       JFrame itIsPastaScreen = screenBuilder.itIsPastaScreen(itIsLasagnaScreen, itIsChocolateCakeScreen);
 
        JFrame thinkInAPlateFrame = screenBuilder.thinkInAPlateScreen(itIsPastaScreen);
 
@@ -14,3 +18,4 @@ public class CriaDialogo {
   }
 
 }
+

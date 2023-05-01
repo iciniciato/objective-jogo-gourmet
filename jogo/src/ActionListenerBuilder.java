@@ -6,10 +6,20 @@ import java.util.ArrayList;
 
 public class ActionListenerBuilder {
 
-    public ActionListener actionListener (JFrame nextScreen) {
+    public ActionListener actionListenerForTextField (ArrayList<JFrame> screensToClose, JFrame nextScreen, JTextField textField) {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                closeScreens(screensToClose);
+            }
+        };
+    }
+
+    public ActionListener actionListener (ArrayList<JFrame> screensToClose, JFrame nextScreen) {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                closeScreens(screensToClose);
                 nextScreen.setVisible(true);
             }
         };
@@ -19,8 +29,12 @@ public class ActionListenerBuilder {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                screensToClose.forEach(Window::dispose);
+                closeScreens(screensToClose);
             }
         };
+    }
+
+    private void closeScreens (ArrayList<JFrame> frames){
+        frames.forEach(Window::dispose);
     }
 }
