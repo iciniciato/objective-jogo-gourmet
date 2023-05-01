@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class ScreenBuilder {
+
     private static ScreenBuilder instance;
     private static final ArrayList<JFrame> frames = new ArrayList<>();
 
     private String plate = null;
+    private String oldPlate = null;
+    private String guess = null;
 
-    private ScreenBuilder() {}
+    private ScreenBuilder() {
+    }
 
     public static ScreenBuilder getInstance() {
         if (instance == null) {
@@ -18,68 +22,67 @@ public class ScreenBuilder {
         return instance;
     }
 
-    public JFrame thinkInAPlateScreen (JFrame nextScreen) {
+    public JFrame firstScreen(JFrame nextScreen) {
         FrameBuilder frameBuilder = new FrameBuilder();
         ActionListenerBuilder actionListenerBuilder = new ActionListenerBuilder();
 
-        JFrame thinkInAPlateFrame = frameBuilder.buildEmptyFrame("Jogo Gourmet");
+        JFrame thinkInAPlateFrame = frameBuilder.buildEmptyFrame(Constants.GAME_GOURMET);
         frames.add(thinkInAPlateFrame);
 
-        JPanel thinkInAPlatePanel = frameBuilder.textPanel("Pense em um prato que gosta");
-        thinkInAPlateFrame.add(thinkInAPlatePanel,  BorderLayout.CENTER);
+        JPanel thinkInAPlatePanel = frameBuilder.textPanel(Constants.THINK_A_PLATE_YOU_LIKE);
+        thinkInAPlateFrame.add(thinkInAPlatePanel, BorderLayout.CENTER);
 
-        thinkInAPlatePanel.add(frameBuilder.createCentralizedButton(actionListenerBuilder.actionListener(frames, nextScreen), "OK"));
+        thinkInAPlatePanel.add(frameBuilder.createCentralizedButton(actionListenerBuilder.actionListener(frames, nextScreen), Constants.OK));
 
         return thinkInAPlateFrame;
     }
 
-    public JFrame itIsPastaScreen (JFrame yesScreen, JFrame noScreen) {
-        return defaultYesNoScreen("O prato que você pensou é massa?", yesScreen, noScreen);
+    public JFrame secondScreen(JFrame yesScreen, JFrame noScreen) {
+        return defaultYesNoScreen(Constants.THE_PLATE_YOU_THOUGHT_OF_IS + Constants.PASTA + Constants.INTERROGATION, yesScreen, noScreen);
     }
 
-    public JFrame itIsLasagnaScreen(JFrame yesScreen, JFrame noScreen){
-        return defaultYesNoScreen("O prato que você pensou é Lasanha?", yesScreen, noScreen);
+    public JFrame thirdScreen(JFrame yesScreen, JFrame noScreen) {
+        return defaultYesNoScreen(Constants.THE_PLATE_YOU_THOUGHT_OF_IS + Constants.LASAGNA + Constants.INTERROGATION, yesScreen, noScreen);
     }
 
-    public JFrame whatDoYouThought(){
+    public JFrame fifthScreen() {
         FrameBuilder frameBuilder = new FrameBuilder();
         ActionListenerBuilder actionListenerBuilder = new ActionListenerBuilder();
 
-        JFrame whatDoYouThoughtFrame = frameBuilder.buildEmptyFrame("Jogo Gourmet");
+        JFrame whatDoYouThoughtFrame = frameBuilder.buildEmptyFrame(Constants.GAME_GOURMET);
         whatDoYouThoughtFrame.setSize(285, 150);
         frames.add(whatDoYouThoughtFrame);
 
-        JPanel whatDoYouThoughtPanel = frameBuilder.questionTextPanel("Qual prato você pensou?");
+        JPanel whatDoYouThoughtPanel = frameBuilder.questionTextPanel(Constants.WITCH_PLATE_DID_YOU_THINK);
 
         JTextField plateTextField = new JTextField();
-        plateTextField.setColumns(1);
         plateTextField.setAlignmentX(Component.CENTER_ALIGNMENT);
         whatDoYouThoughtPanel.add(plateTextField);
 
-        whatDoYouThoughtFrame.add(whatDoYouThoughtPanel,  BorderLayout.CENTER);
-        whatDoYouThoughtPanel.add(frameBuilder.createOkCancelButton(frames, actionListenerBuilder.actionListenerForTextField(frames, null, plateTextField)), BorderLayout.CENTER);
+        whatDoYouThoughtFrame.add(whatDoYouThoughtPanel, BorderLayout.CENTER);
+        whatDoYouThoughtPanel.add(frameBuilder.createOkCancelButton(frames, actionListenerBuilder.actionListenerForTextField(frames, plateTextField)), BorderLayout.CENTER);
 
         return whatDoYouThoughtFrame;
     }
 
-    public JFrame doYouThoughtInThisPlate(JFrame yesScreen, JFrame noScreen){
-        JFrame screen = defaultYesNoScreen("O prato que você pensou é " + getPlate() + "?", yesScreen, noScreen);
-        screen.setSize(340, 130);
+    public JFrame interrogationScreen(String plate, JFrame yesScreen, JFrame noScreen) {
+        String text = Constants.THE_PLATE_YOU_THOUGHT_OF_IS + plate + Constants.INTERROGATION;
+        JFrame screen = defaultYesNoScreen(text, yesScreen, noScreen);
+        screen.setSize(text.length() * 9, 130);
         return screen;
     }
 
-
-    public JFrame imRightAgain(){
+    public JFrame lastScreen() {
         FrameBuilder frameBuilder = new FrameBuilder();
         ActionListenerBuilder actionListenerBuilder = new ActionListenerBuilder();
 
-        JFrame imRightAgainFrame = frameBuilder.buildEmptyFrame("Jogo Gourmet");
+        JFrame imRightAgainFrame = frameBuilder.buildEmptyFrame(Constants.GAME_GOURMET);
         frames.add(imRightAgainFrame);
-        JPanel imRightAgainPanel = frameBuilder.infoTextPanel("Acertei de novo!");
-        imRightAgainFrame.add(imRightAgainPanel,  BorderLayout.CENTER);
+        JPanel imRightAgainPanel = frameBuilder.infoTextPanel(Constants.I_HIT_AGAIN);
+        imRightAgainFrame.add(imRightAgainPanel, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel();
-        JButton okButton = new JButton("OK");
+        JButton okButton = new JButton(Constants.OK);
         okButton.addActionListener(actionListenerBuilder.closeAllScreens(frames));
 
         buttonPanel.add(okButton);
@@ -91,14 +94,35 @@ public class ScreenBuilder {
         return imRightAgainFrame;
     }
 
-    private JFrame defaultYesNoScreen (String text, JFrame yesScreen, JFrame noScreen){
+    public JFrame butIsNot() {
+        FrameBuilder frameBuilder = new FrameBuilder();
+        ActionListenerBuilder actionListenerBuilder = new ActionListenerBuilder();
+        String text = Constants.getButIsNot(getPlate(), getOldPlate());
+
+        JFrame whatDoYouThoughtFrame = frameBuilder.buildEmptyFrame(Constants.GAME_GOURMET);
+        whatDoYouThoughtFrame.setSize(text.length() * 9, 150);
+        frames.add(whatDoYouThoughtFrame);
+
+        JPanel whatDoYouThoughtPanel = frameBuilder.questionTextPanel(text);
+
+        JTextField plateTextField = new JTextField();
+        plateTextField.setAlignmentX(Component.CENTER_ALIGNMENT);
+        whatDoYouThoughtPanel.add(plateTextField);
+
+        whatDoYouThoughtFrame.add(whatDoYouThoughtPanel, BorderLayout.CENTER);
+        whatDoYouThoughtPanel.add(frameBuilder.createOkCancelButton(frames, actionListenerBuilder.lastActionListener(frames, plateTextField)), BorderLayout.CENTER);
+
+        return whatDoYouThoughtFrame;
+    }
+
+    private JFrame defaultYesNoScreen(String text, JFrame yesScreen, JFrame noScreen) {
         FrameBuilder frameBuilder = new FrameBuilder();
 
-        JFrame defaultYesNoFrame = frameBuilder.buildEmptyFrame("Jogo Gourmet");
+        JFrame defaultYesNoFrame = frameBuilder.buildEmptyFrame(Constants.GAME_GOURMET);
         frames.add(defaultYesNoFrame);
 
         JPanel defaultYesNoPanel = frameBuilder.questionTextPanel(text);
-        defaultYesNoFrame.add(defaultYesNoPanel,  BorderLayout.CENTER);
+        defaultYesNoFrame.add(defaultYesNoPanel, BorderLayout.CENTER);
         defaultYesNoPanel.add(frameBuilder.createYesNoButton(frames, yesScreen, noScreen), BorderLayout.CENTER);
 
         return defaultYesNoFrame;
@@ -108,10 +132,29 @@ public class ScreenBuilder {
         this.plate = plate;
     }
 
+    public void setOldPlate(String oldPlate) {
+        this.oldPlate = oldPlate;
+    }
+
+    public void setGuess(String guess) {
+        this.guess = guess;
+    }
+
     public String getPlate() {
-        if(Objects.isNull(plate) || plate.isEmpty()){
-            return "bolo de chocolate";
+        if (Objects.isNull(plate) || plate.isEmpty()) {
+            return Constants.CHOCOLATE_CAKE;
         }
         return plate;
+    }
+
+    public String getOldPlate() {
+        if (Objects.isNull(this.oldPlate) || oldPlate.isEmpty()) {
+            return Constants.CHOCOLATE_CAKE;
+        }
+        return oldPlate;
+    }
+
+    public String getGuess() {
+        return guess;
     }
 }
