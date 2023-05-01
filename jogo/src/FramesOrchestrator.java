@@ -31,7 +31,7 @@ public class FramesOrchestrator {
         JFrame lastScreen = screenBuilder.lastScreen();
         JFrame fifthScreen = screenBuilder.fifthScreen();
 
-        JFrame cakeScreen = screenBuilder.interrogationScreen(Constants.chocolateCake, lastScreen, fifthScreen);
+        JFrame cakeScreen = screenBuilder.interrogationScreen(Constants.CHOCOLATE_CAKE, lastScreen, fifthScreen);
         JFrame forthScreen;
 
         if (Objects.nonNull(screenBuilder.getGuess()) && !screenBuilder.getGuess().isBlank()) {
