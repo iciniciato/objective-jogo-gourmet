@@ -16,8 +16,8 @@ Dicas:
 
 # Considerações sobre o desafio
 - Nunca havia feito nenhum jogo, foi bem complicado entender como funciona um game loop, pesquisei bastante antes de entender que é uma solução muito usual para jogos e que se enquadrava muito bem no desafio.
-- No jogo de exemplo no campo disponível para escrita do prato, ele aceita o campo vazio e segue o fluxo com o campo vindo como "null". No meu desenvolvimento fiz um tratamento para retornar para a tela de ínicio caso esse campo retorno nulo ou vazio.
-- Tentei aproximar a aparencia do meu projeto o maximo possivel do projeto exemplo, tive algumas dificuldades sendo a mais evidente a do tamanho do textField, sei que o problema está relacionado a criação do textPanel onde defino o BoxLayout igual a BoxLayout.Y_AXIS, mas não encontrei, a tempo, nenhuma solução que deixasse o campo mais próximo do original.
+- No jogo de exemplo no campo disponível para escrita do prato, ele aceita o campo vazio e segue o fluxo com o campo vindo como "null". No meu desenvolvimento fiz um tratamento para retornar para a tela de ínicio caso esse campo retorne nulo ou vazio.
+- Tentei aproximar a aparência do meu projeto o máximo possível do projeto exemplo, tive algumas dificuldades sendo a mais evidente a do tamanho do textField, sei que o problema está relacionado a criação do textPanel onde defino o BoxLayout igual a BoxLayout.Y_AXIS, mas não encontrei a tempo nenhuma solução que deixasse o campo mais próximo do original.
 
 # Ferramentas utilizadas
 - Java 11
