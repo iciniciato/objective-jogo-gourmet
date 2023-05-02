@@ -1,4 +1,5 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=iciniciato_objective-jogo-gourmet&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=iciniciato_objective-jogo-gourmet)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 # objective-jogo-gourmet-simples
 
