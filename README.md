@@ -1,6 +1,4 @@
-[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=iciniciato_objective-jogo-gourmet)](https://sonarcloud.io/summary/new_code?id=iciniciato_objective-jogo-gourmet)
-
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=iciniciato_objective-jogo-gourmet)](https://sonarcloud.io/summary/new_code?id=iciniciato_objective-jogo-gourmet) [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 # objective-jogo-gourmet-simples
 
