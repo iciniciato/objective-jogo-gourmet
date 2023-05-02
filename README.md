@@ -1,3 +1,5 @@
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=iciniciato_objective-jogo-gourmet&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=iciniciato_objective-jogo-gourmet)
+
 # objective-jogo-gourmet-simples
 
 Exemplo do Jogo Gourmet: <https://www.dropbox.com/s/bbek2kmd2dvvumh/JogoGourmet.zip?dl=0>
