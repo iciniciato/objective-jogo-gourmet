@@ -1,3 +1,8 @@
+package br.com.gourmetgame.orchestrator;
+
+import br.com.gourmetgame.utils.*;
+import br.com.gourmetgame.builders.ScreenBuilder;
+
 import javax.swing.*;
 import java.util.Objects;
 
@@ -16,6 +21,7 @@ public class FramesOrchestrator {
     }
 
     public void executor() throws InterruptedException {
+
         while (true) {
             Thread.sleep(100);
             if (isShouldRestart()) {
@@ -49,7 +55,7 @@ public class FramesOrchestrator {
     }
 
     public boolean isShouldRestart() {
-        return shouldRestart;
+        return this.shouldRestart;
     }
 
     public void setShouldRestart(boolean shouldRestart) {
