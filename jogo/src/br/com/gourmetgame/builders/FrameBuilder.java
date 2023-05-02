@@ -1,13 +1,15 @@
+package br.com.gourmetgame.builders;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.util.List;
 
 public class FrameBuilder {
 
     public JFrame buildEmptyFrame (String title) {
         JFrame jFrame = new JFrame();
-        jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        jFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         jFrame.setResizable(true);
         jFrame.setSize(285, 130);
         jFrame.setTitle(title);
@@ -43,7 +45,7 @@ public class FrameBuilder {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(Box.createVerticalStrut(10));
 
-        JLabel label = new JLabel("    " + text, UIManager.getIcon("OptionPane.questionIcon"), JLabel.RIGHT);
+        JLabel label = new JLabel("    " + text, UIManager.getIcon("OptionPane.questionIcon"), SwingConstants.RIGHT);
         label.setAlignmentX(0.23f);
         panel.add(label);
 
@@ -57,7 +59,7 @@ public class FrameBuilder {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(Box.createVerticalStrut(10));
 
-        JLabel label = new JLabel("    " + text,  UIManager.getIcon("OptionPane.informationIcon"), JLabel.RIGHT);
+        JLabel label = new JLabel("    " + text,  UIManager.getIcon("OptionPane.informationIcon"), SwingConstants.RIGHT);
         label.setAlignmentX(0.1f);
         panel.add(label);
 
@@ -102,7 +104,7 @@ public class FrameBuilder {
         return button;
     }
 
-    public JPanel createYesNoButton(ArrayList<JFrame> frames, JFrame yesActionListener, JFrame noActionListener) {
+    public JPanel createYesNoButton(List<JFrame> frames, JFrame yesActionListener, JFrame noActionListener) {
         ActionListenerBuilder actionListenerBuilder = new ActionListenerBuilder();
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         buttonPanel.add(createYesButton(actionListenerBuilder.actionListener(frames, yesActionListener)));
@@ -110,7 +112,7 @@ public class FrameBuilder {
         return buttonPanel;
     }
 
-    public JPanel createOkCancelButton(ArrayList<JFrame> frames, ActionListener okActionListener) {
+    public JPanel createOkCancelButton(List<JFrame> frames, ActionListener okActionListener) {
         ActionListenerBuilder actionListenerBuilder = new ActionListenerBuilder();
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         buttonPanel.add(createOKButton(okActionListener));

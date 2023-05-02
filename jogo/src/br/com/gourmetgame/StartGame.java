@@ -1,3 +1,6 @@
+package br.com.gourmetgame;
+
+import br.com.gourmetgame.orchestrator.FramesOrchestrator;
 
 public class StartGame {
 

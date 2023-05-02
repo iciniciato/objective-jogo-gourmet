@@ -1,3 +1,7 @@
+package br.com.gourmetgame.builders;
+
+import br.com.gourmetgame.utils.Constants;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -38,11 +42,11 @@ public class ScreenBuilder {
     }
 
     public JFrame secondScreen(JFrame yesScreen, JFrame noScreen) {
-        return defaultYesNoScreen(Constants.THE_PLATE_YOU_THOUGHT_OF_IS + Constants.PASTA + Constants.INTERROGATION, yesScreen, noScreen);
+        return defaultYesNoScreen(Constants.PASTA_TEXT, yesScreen, noScreen);
     }
 
     public JFrame thirdScreen(JFrame yesScreen, JFrame noScreen) {
-        return defaultYesNoScreen(Constants.THE_PLATE_YOU_THOUGHT_OF_IS + Constants.LASAGNA + Constants.INTERROGATION, yesScreen, noScreen);
+        return defaultYesNoScreen(Constants.LASAGNA_TEXT, yesScreen, noScreen);
     }
 
     public JFrame fifthScreen() {
@@ -148,13 +152,13 @@ public class ScreenBuilder {
     }
 
     public String getOldPlate() {
-        if (Objects.isNull(this.oldPlate) || oldPlate.isEmpty()) {
+        if (Objects.isNull(this.oldPlate) || this.oldPlate.isEmpty()) {
             return Constants.CHOCOLATE_CAKE;
         }
         return oldPlate;
     }
 
     public String getGuess() {
-        return guess;
+        return this.guess;
     }
 }
