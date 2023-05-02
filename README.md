@@ -23,3 +23,4 @@ Dicas:
 - Java 11
 - Intellij 2023.1.1
 - Sonarlint
+- SonarCloud
