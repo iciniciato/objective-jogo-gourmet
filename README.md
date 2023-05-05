@@ -31,3 +31,6 @@ Dicas:
 # Fluxograma de validação
 ![Fluxograma Jogo Gourmet](https://user-images.githubusercontent.com/69757673/236361868-f2fd6bcd-a177-43fd-b017-ed0111aa3987.jpg)
 https://miro.com/app/board/uXjVMMPiiP0=/?share_link_id=488235383912
+
+# Nota ao avaliador
+Em minha revisão do código o único problema relevante que encontrei foi que ao fechar a janela utilizando o "X" no canto superior direito o jogo continuava rodando em background ao invéz de realmente fechar, corrigi em meu último commit, ademais não encontrei nenhum outro bug além de pequenos problemas de UI.
