@@ -24,3 +24,10 @@ Dicas:
 - Intellij 2023.1.1
 - Sonarlint
 - SonarCloud
+
+# Jar gerado a partir do projeto
+[JogoGourmet.zip](https://github.com/iciniciato/objective-jogo-gourmet/files/11402777/JogoGourmet.zip)
+
+# Fluxograma de validação
+![Fluxograma Jogo Gourmet](https://user-images.githubusercontent.com/69757673/236361868-f2fd6bcd-a177-43fd-b017-ed0111aa3987.jpg)
+https://miro.com/app/board/uXjVMMPiiP0=/?share_link_id=488235383912
