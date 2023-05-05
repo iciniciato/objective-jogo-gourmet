@@ -9,7 +9,7 @@ public class FrameBuilder {
 
     public JFrame buildEmptyFrame (String title) {
         JFrame jFrame = new JFrame();
-        jFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         jFrame.setResizable(true);
         jFrame.setSize(285, 130);
         jFrame.setTitle(title);
